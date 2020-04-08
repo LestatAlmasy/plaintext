@@ -14,8 +14,6 @@ module Plaintext
           Plaintext::OpendocumentHandler,
           Plaintext::DocxHandler, Plaintext::XlsxHandler, Plaintext::PptxHandler,
           Plaintext::DocHandler, Plaintext::XlsHandler, Plaintext::PptHandler,
-          Plaintext::ImageHandler,
-          Plaintext::RtfHandler,
           Plaintext::PlaintextHandler
       ].freeze
 
@@ -38,11 +36,10 @@ module Plaintext
       if handler = find_handler and
           text = handler.text(@file, max_size: max_plaintext_bytes)
 
-        # text.gsub!(/\s+/m, ' ')
-        # text.strip!
         text.mb_chars.compose.limit(max_plaintext_bytes).to_s
       end
     end
+
 
     private
 
